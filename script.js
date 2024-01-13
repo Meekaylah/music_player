@@ -79,6 +79,15 @@ const allSongs = [
 ];
 
 const audio = new Audio();
+let userData = {
+  songs: [...allSongs],
+  currentSong: null,
+  songCurrentTime: 0,
+};
+
+const playSong = (id) => {
+  const song = userData?.songs.find((song) => song.id === id)
+};
 
 const renderSongs = (array) => {
   const songsHTML = array
@@ -97,9 +106,9 @@ const renderSongs = (array) => {
       </li>
       `;
     })
-  .join("");
+    .join("");
 
-  playlistSongs.innerHTML = songsHTML
+  playlistSongs.innerHTML = songsHTML;
 };
 
 renderSongs(userData?.songs);
