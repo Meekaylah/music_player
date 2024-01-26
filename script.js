@@ -95,7 +95,7 @@ const playSong = (id) => {
   } else {
     audio.currentTime = userData.songCurrentTime;
   }
-  
+
   userData.currentSong = song;
   playButton.classList.add("playing");
 
@@ -117,6 +117,16 @@ const playNextSong = () => {
     playSong(nextSong.id)
   }
 }
+
+const playPreviousSong = () => {
+  if (userData?.currentSong === null) {
+    return
+  } else {
+    const currentSongIndex = getCurrentSongIndex();
+    const previousSong = userData?.songs[currentSongIndex - 1];
+    playSong(previousSong.id)
+  }
+};
 
 const renderSongs = (array) => {
   const songsHTML = array
@@ -155,5 +165,7 @@ playButton.addEventListener("click", () => {
 pauseButton.addEventListener("click", pauseSong);
 
 nextButton.addEventListener("click", playNextSong)
+
+previousButton.addEventListener('click', playPreviousSong)
 
 renderSongs(userData?.songs);
