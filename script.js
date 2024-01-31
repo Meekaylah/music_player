@@ -93,7 +93,7 @@ const playSong = (id) => {
   if (userData?.currentSong === null || userData?.currentSong.id !== song.id) {
     audio.currentTime = 0;
   } else {
-    audio.currentTime = userData.songCurrentTime;
+    audio.currentTime = userData?.songCurrentTime;
   }
   userData.currentSong = song;
   playButton.classList.add("playing");
@@ -131,6 +131,8 @@ const playPreviousSong = () =>{
     playSong(previousSong.id);
    }
 };
+
+  
 
 const setPlayerDisplay = () => {
   const playingSong = document.getElementById("player-song-title");
@@ -186,7 +188,7 @@ const setPlayButtonAccessibleText = () => {
   );
 };
 
-const getCurrentSongIndex = () => userData?.songs.indexOf(userData.currentSong);
+const getCurrentSongIndex = () => userData?.songs.indexOf(userData?.currentSong);
 
 playButton.addEventListener("click", () => {
     if (userData?.currentSong === null) {
@@ -201,5 +203,17 @@ pauseButton.addEventListener("click",  pauseSong);
 nextButton.addEventListener("click", playNextSong);
 
 previousButton.addEventListener("click", playPreviousSong);
+
+userData?.songs.sort((a,b) => {
+  if (a.title < b.title) {
+    return -1;
+  }
+
+  if (a.title > b.title) {
+    return 1;
+  }
+
+  return 0;
+});
 
 renderSongs(userData?.songs);
