@@ -282,5 +282,5 @@ audio.addEventListener("ended", () => {
     }
 });
 
-renderSongs(userData?.songs);
+renderSongs(sortSongs());
 setPlayButtonAccessibleText();
